@@ -1,26 +1,19 @@
 "use client";
 
 import useGlobalStore from "@/hooks/useGlobalStore";
-import useProducts from "@/hooks/useProducts";
 import { Select, SelectItem, Spinner } from "@nextui-org/react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 export default function ProductList() {
-  const { data, isLoading } = useProducts();
-  const { productSelected, setProductSelected } = useGlobalStore();
-  if (isLoading)
-    return (
-      <div className="min-w-[200px] flex items-center justify-center">
-        <Spinner />
-      </div>
-    );
+  const { productSelected, setProductSelected, products } = useGlobalStore();
+
   return (
     <div>
       <div className="flex flex-col gap-1 min-w-[200px]">
-        {data ? (
-          data
+        {products ? (
+          products
             .filter((p) => p.visible)
             .map((product) => (
               <div

@@ -1,5 +1,4 @@
 import useGlobalStore from "@/hooks/useGlobalStore";
-import useProducts from "@/hooks/useProducts";
 import { formatPrice, formatPriceWithIncrement } from "@/utils";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
@@ -26,10 +25,8 @@ const Timer = ({ time }: { time: number }) => {
 };
 
 export default function ProductDetail() {
-  const { productSelected } = useGlobalStore();
-  const { data, isLoading } = useProducts();
-  const product = data?.find((p) => p.product_id === productSelected);
-  if (isLoading) return <div>Loading...</div>;
+  const { productSelected, products } = useGlobalStore();
+  const product = products?.find((p) => p.product_id === productSelected);
   if (!product) return <div>No product data</div>;
 
   return (

@@ -1,34 +1,35 @@
 "use client";
 import ProductList from "./ProductList";
 import { Button } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 import Image from "next/image";
 import useGlobalStore from "@/hooks/useGlobalStore";
 import { ArrowLeft } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import ProductDetail from "./ProductDetail";
-import useProducts from "@/hooks/useProducts";
 import clsx from "clsx";
 import OrderBook from "./OrderBook";
+import { IProduct } from "@/api";
 
 const transition = {
   ease: [0, 0.5, 0.4, 1],
   duration: 0.5,
 };
 
-export default function Wrapper() {
+export default function Wrapper({ products }: { products: IProduct[] }) {
   const [isBooting, setIsBooting] = useState(true);
-  const { productSelected, setProductSelected } = useGlobalStore();
-
-  // prefetch products
-  useProducts();
+  const { productSelected, setProductSelected, setProducts } = useGlobalStore();
 
   useEffect(() => {
     setTimeout(() => {
       setIsBooting(false);
     }, 2000);
   }, []);
+
+  useEffect(() => {
+    setProducts(products);
+  }, [products]);
 
   return (
     <div className="gap-4 bg-slate-950 p-3 rounded-xl shadow-2xl h-[600px] relative z-10 opacity-95">

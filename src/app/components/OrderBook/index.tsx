@@ -2,10 +2,8 @@
 
 import useGlobalStore from "@/hooks/useGlobalStore";
 import useOrderBookData from "@/hooks/useOrderBookData";
-import useProducts from "@/hooks/useProducts";
-import { formatPrice, formatPriceWithIncrement } from "@/utils";
+import { formatPriceWithIncrement } from "@/utils";
 import { Skeleton } from "@nextui-org/react";
-import clsx from "clsx";
 import { useMemo, useRef, useState } from "react";
 import Overlay from "./Overlay";
 import OrderItem from "./OrderItem";
@@ -13,8 +11,7 @@ import OrderItem from "./OrderItem";
 export default function OrderBook() {
   const { data: orderBookData, isLoading } = useOrderBookData();
   const [orderBookSize, setOrderBookSize] = useState(10);
-  const { productSelected } = useGlobalStore();
-  const { data: products } = useProducts();
+  const { productSelected, products } = useGlobalStore();
   const product = useMemo(() => {
     return products?.find((p) => p.product_id === productSelected);
   }, [productSelected, products]);
