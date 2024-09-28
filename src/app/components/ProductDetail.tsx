@@ -1,6 +1,6 @@
 import useGlobalStore from "@/hooks/useGlobalStore";
 import useProducts from "@/hooks/useProducts";
-import { formatPriceWithIncrement } from "@/utils";
+import { formatPrice, formatPriceWithIncrement } from "@/utils";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 
@@ -61,14 +61,12 @@ export default function ProductDetail() {
         </div>
         <div className="bg-slate-900 rounded-lg p-1.5 px-2 flex flex-col gap-1.5">
           <div className="text-[11px] text-white/50 text-nowrap">24h Volume</div>{" "}
-          <div className="text-xs font-bold">
-            ${formatPriceWithIncrement(Math.floor(+product.quote_volume_24h), product.base_increment)}
-          </div>
+          <div className="text-xs font-bold">${formatPrice(Math.floor(+product.quote_volume_24h))}</div>
         </div>
         <div className="bg-slate-900 rounded-lg p-1.5 px-2 flex flex-col gap-1.5">
           <div className="text-[10px] text-white/50 text-nowrap">Open Interest</div>{" "}
           <div className="text-xs font-bold">
-            {formatPriceWithIncrement(product.open_interest, product.base_increment)}
+            {formatPrice(product.open_interest)}
             <span className="text-[11px] font-normal text-white/50"> {product.base_asset_symbol}</span>
           </div>
         </div>

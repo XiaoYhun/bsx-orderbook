@@ -22,6 +22,8 @@ function isOrderBookData(data: any): data is OrderBookData {
   return data?.channel === "book";
 }
 
+const socket = new WebSocket("wss://ws.bsx.exchange/ws");
+
 export default function useOrderBookData(): { data: OrderBookState; isLoading: boolean } {
   const { productSelected } = useGlobalStore();
   const [orderBookState, setOrderBookState] = useState<OrderBookState>({ bids: [], asks: [] });
@@ -30,12 +32,7 @@ export default function useOrderBookData(): { data: OrderBookState; isLoading: b
   useEffect(() => {
     if (!productSelected) return;
 
-    const socket = new WebSocket("wss://ws.bsx.exchange/ws");
-
-    socket.onopen = () => {
-      console.log("connected");
-      socket.send(JSON.stringify({ op: "sub", channel: "book", product: productSelected }));
-    };
+    socket.send(JSON.stringify({ op: "sub", channel: "book", product: productSelected }));
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
 
@@ -77,14 +74,9 @@ export default function useOrderBookData(): { data: OrderBookState; isLoading: b
         }
       }
     };
-    socket.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
-    socket.onclose = () => {
-      console.log("WebSocket connection closed");
-    };
+
     return () => {
-      socket.close();
+      socket.send(JSON.stringify({ op: "unsub", channel: "book", product: productSelected }));
       setOrderBookState({ asks: [], bids: [] });
       setIsLoading(true);
     };

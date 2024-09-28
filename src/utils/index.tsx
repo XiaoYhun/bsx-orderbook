@@ -13,5 +13,5 @@ export const formatPrice = (price: number | string) => {
 
 export const formatPriceWithIncrement = (price: number | string, increment: number | string) => {
   const decimals = Math.abs(Math.log10(+increment));
-  return (+price).toLocaleString("en-US", { minimumFractionDigits: decimals });
+  return (+price).toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
 };
