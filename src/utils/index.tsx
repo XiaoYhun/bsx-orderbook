@@ -1,5 +1,5 @@
 export const formatPrice = (price: number | string) => {
-  let result = parseFloat(price.toString());
+  const result = parseFloat(price.toString());
   const integerPart = result.toString().split(".")[0];
   let decimalPart = result.toString().split(".")[1] || "";
   if (integerPart.length + decimalPart.length >= 5) {

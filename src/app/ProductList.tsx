@@ -35,7 +35,7 @@ export default function ProductList() {
                   {product.product_id}
                 </motion.div>
                 <ArrowRight
-                  className="group-hover:translate-x-0 opacity-0 group-hover:opacity-100 duration-200 translate-x-2"
+                  className="group-hover:translate-x-0 opacity-0 group-hover:opacity-100 duration-200 -translate-x-2"
                   size={16}
                 />
               </div>

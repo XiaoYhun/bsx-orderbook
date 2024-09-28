@@ -59,7 +59,7 @@ export default function Wrapper() {
                 }}
                 className="flex flex-col gap-2 items-center justify-center flex-1 absolute w-full"
               >
-                <div className="font-semibold">Product list:</div>
+                <div className="font-bold">Product List:</div>
                 <ProductList />
               </motion.div>
 

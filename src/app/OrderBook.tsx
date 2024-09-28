@@ -212,7 +212,7 @@ export default function OrderBook() {
           ))}
       </div>
     );
-  }, []);
+  }, [orderBookSize]);
   const renderOrderBook = useMemo(() => {
     if (!orderBookData || !product) return <div>No data</div>;
 
@@ -257,6 +257,7 @@ export default function OrderBook() {
           <Overlay size={orderBookSize} data={asksInRange} />
           {asksInRange.map(([price, size, cumulativeValue], index) => (
             <OrderItem
+              key={price}
               price={price}
               size={size}
               cumulativeValue={cumulativeValue}
@@ -276,6 +277,7 @@ export default function OrderBook() {
           <Overlay size={orderBookSize} data={bidsInRange} isReverse />
           {bidsInRange.map(([price, size, cumulativeValue], index) => (
             <OrderItem
+              key={price}
               isBid
               price={price}
               size={size}
@@ -289,7 +291,7 @@ export default function OrderBook() {
         </div>
       </div>
     );
-  }, [orderBookData, product]);
+  }, [orderBookData, product, orderBookSize]);
 
   if (!product) return <div>No data</div>;
 
