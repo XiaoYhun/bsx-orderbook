@@ -1,5 +1,6 @@
 import { api } from "@/api";
 import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 
 interface IProduct {
   index: number;
@@ -37,18 +38,14 @@ interface IProduct {
 }
 
 export default function useProducts() {
-  const [products, setProducts] = useState<IProduct[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    api.get<{ products: IProduct[] }>("/products").then((response) => {
-      response.data;
-      if (response.ok) {
-        setProducts(response.data?.products || []);
-      } else {
-        throw new Error(response.problem);
-      }
-      setIsLoading(false);
-    });
-  }, []);
-  return { data: products, isLoading };
+  const { data, isLoading } = useQuery("products", async () => {
+    const res = await api.get<{ products: IProduct[] }>("/products");
+    if (res.ok) {
+      return res.data?.products || [];
+    } else {
+      throw new Error(res.problem);
+    }
+  });
+
+  return { data, isLoading };
 }

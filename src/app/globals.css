@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 body {
-  background-color: black;
+  background: linear-gradient(to bottom, rgb(14, 16, 92), rgb(51, 19, 110));
+
   color: white;
 }
 @keyframes colorChangeRed {

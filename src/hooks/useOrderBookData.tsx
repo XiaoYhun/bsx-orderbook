@@ -44,8 +44,8 @@ export default function useOrderBookData(): { data: OrderBookState; isLoading: b
           setIsLoading(false);
           // handle snapshot
           setOrderBookState({
-            bids: data.data.bids.sort((a, b) => +b[0] - +a[0]),
-            asks: data.data.asks.sort((a, b) => +b[0] - +a[0]),
+            bids: data.data.bids.filter((a) => +a[1] > 0).sort((a, b) => +b[0] - +a[0]),
+            asks: data.data.asks.filter((a) => +a[1] > 0).sort((a, b) => +b[0] - +a[0]),
           });
         }
         if (data.type === "update") {
@@ -56,11 +56,7 @@ export default function useOrderBookData(): { data: OrderBookState; isLoading: b
             data.data.bids.forEach(([price, size]) => {
               const index = newBids.findIndex((b) => b[0] === price);
               if (index >= 0) {
-                if (size === "0") {
-                  newBids.splice(index, 1);
-                } else {
-                  newBids[index] = [price, size];
-                }
+                newBids[index] = [price, size];
               } else {
                 newBids.push([price, size]);
               }
@@ -68,18 +64,14 @@ export default function useOrderBookData(): { data: OrderBookState; isLoading: b
             data.data.asks.forEach(([price, size]) => {
               const index = newAsks.findIndex((b) => b[0] === price);
               if (index >= 0) {
-                if (size === "0") {
-                  newAsks.splice(index, 1);
-                } else {
-                  newAsks[index] = [price, size];
-                }
+                newAsks[index] = [price, size];
               } else {
                 newAsks.push([price, size]);
               }
             });
             return {
-              bids: newBids.sort((a, b) => +b[0] - +a[0]),
-              asks: newAsks.sort((a, b) => +b[0] - +a[0]),
+              bids: newBids.filter((a) => +a[1] > 0).sort((a, b) => +b[0] - +a[0]),
+              asks: newAsks.filter((a) => +a[1] > 0).sort((a, b) => +b[0] - +a[0]),
             };
           });
         }
