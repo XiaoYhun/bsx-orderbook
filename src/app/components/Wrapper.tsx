@@ -1,7 +1,6 @@
 "use client";
 import ProductList from "./ProductList";
-import { Button, Divider } from "@nextui-org/react";
-import OrderBook from "./OrderBook";
+import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
 import Image from "next/image";
@@ -11,6 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import ProductDetail from "./ProductDetail";
 import useProducts from "@/hooks/useProducts";
 import clsx from "clsx";
+import OrderBook from "./OrderBook";
 
 const transition = {
   ease: [0, 0.5, 0.4, 1],
