@@ -182,7 +182,6 @@ const Overlay = ({ size, data, isReverse }: { size: number; data: string[][]; is
 
 export default function OrderBook() {
   const { data: orderBookData, isLoading } = useOrderBookData();
-  console.log("🚀 ~ OrderBook ~ orderBookData:", orderBookData);
   const [orderBookSize, setOrderBookSize] = useState(10);
   const { productSelected } = useGlobalStore();
   const { data: products } = useProducts();
@@ -229,7 +228,6 @@ export default function OrderBook() {
       );
       middleValue.gap = formatPriceWithIncrement(+asks[asks.length - 1][0] - +bids[0][0], product.quote_increment);
     }
-    console.log("🚀 ~ OrderBook ~ middleValue:", middleValue.price);
 
     let cumulative = 0;
     for (let i = asks.length - 1; i > 0; i--) {
@@ -252,7 +250,6 @@ export default function OrderBook() {
     }
 
     const maxSizeInRange = Math.max(...asksInRange.map((a) => +a[2] || 0), ...bidsInRange.map((a) => +a[2] || 0));
-    console.log("🚀 ~ renderOrderBook ~ maxSizeInRange:", maxSizeInRange);
 
     return (
       <div className="font-mono">

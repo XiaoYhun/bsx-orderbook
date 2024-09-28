@@ -29,15 +29,9 @@ export default function ProductDetail() {
   const { productSelected } = useGlobalStore();
   const { data, isLoading } = useProducts();
   const product = data?.find((p) => p.product_id === productSelected);
-  console.log("🚀 ~ ProductDetail ~ product:", product);
   if (isLoading) return <div>Loading...</div>;
   if (!product) return <div>No product data</div>;
-  console.log(
-    "formatPriceWithIncrement(product.last_price, product.quote_increment)",
-    formatPriceWithIncrement(product.last_price, product.quote_increment),
-    product.last_price,
-    product.quote_increment
-  );
+
   return (
     <div className="w-full">
       <div className="bg-slate-900 rounded-lg p-1 col-span-2 row-span-2 items-center flex justify-center font-bold text-2xl w-2/3 py-6 mb-4">

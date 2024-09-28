@@ -79,7 +79,7 @@ export default function Wrapper() {
                     {productSelected}
                   </motion.div>
                 </div>
-                <div className="flex gap-3 w-full items-stretch">
+                <div className="flex  flex-col md:flex-row gap-3 w-full items-stretch">
                   <div className="flex-1">
                     <ProductDetail />
                   </div>
