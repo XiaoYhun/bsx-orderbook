@@ -10,26 +10,24 @@ import { AnimatePresence, motion } from "framer-motion";
 import ProductDetail from "./ProductDetail";
 import clsx from "clsx";
 import OrderBook from "./OrderBook";
-import { IProduct } from "@/api";
+import useProducts from "@/hooks/useProducts";
 
 const transition = {
   ease: [0, 0.5, 0.4, 1],
   duration: 0.5,
 };
 
-export default function Wrapper({ products }: { products: IProduct[] }) {
+export default function Wrapper() {
   const [isBooting, setIsBooting] = useState(true);
-  const { productSelected, setProductSelected, setProducts } = useGlobalStore();
+  const { productSelected, setProductSelected } = useGlobalStore();
+
+  useProducts();
 
   useEffect(() => {
     setTimeout(() => {
       setIsBooting(false);
     }, 2000);
   }, []);
-
-  useEffect(() => {
-    setProducts(products);
-  }, [products]);
 
   return (
     <div className="gap-4 bg-slate-950 p-3 rounded-xl shadow-2xl h-[600px] relative z-10 opacity-95">

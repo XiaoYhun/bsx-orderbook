@@ -1,6 +1,6 @@
 import { create } from "apisauce";
-export const api = create({
-  baseURL: "https://api.bsx.exchange/", // Example base URL
+const api = create({
+  baseURL: "https://api.bsx.exchange/",
   headers: { Accept: "application/json" },
 });
 
@@ -40,6 +40,6 @@ export interface IProduct {
 }
 
 export const getProducts = async () => {
-  const res = await api.get<{ products: IProduct[] }>("/products", { next: { revalidate: 10 } });
+  const res = await api.get<{ products: IProduct[] }>("/products");
   return res.data?.products || [];
 };

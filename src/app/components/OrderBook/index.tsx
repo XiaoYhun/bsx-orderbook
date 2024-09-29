@@ -7,11 +7,13 @@ import { Skeleton } from "@nextui-org/react";
 import { useMemo, useRef, useState } from "react";
 import Overlay from "./Overlay";
 import OrderItem from "./OrderItem";
+import useProducts from "@/hooks/useProducts";
 
 export default function OrderBook() {
   const { data: orderBookData, isLoading } = useOrderBookData();
   const [orderBookSize, setOrderBookSize] = useState(10);
-  const { productSelected, products } = useGlobalStore();
+  const { productSelected } = useGlobalStore();
+  const { data: products } = useProducts();
   const product = useMemo(() => {
     return products?.find((p) => p.product_id === productSelected);
   }, [productSelected, products]);

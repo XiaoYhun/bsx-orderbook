@@ -1,14 +1,15 @@
 "use client";
 
 import useGlobalStore from "@/hooks/useGlobalStore";
-import { Select, SelectItem, Spinner } from "@nextui-org/react";
+import useProducts from "@/hooks/useProducts";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 export default function ProductList() {
-  const { productSelected, setProductSelected, products } = useGlobalStore();
-
+  const { productSelected, setProductSelected } = useGlobalStore();
+  const { data: products } = useProducts();
+  console.log("🚀 ~ ProductList ~ products:", products);
   return (
     <div>
       <div className="flex flex-col gap-1 min-w-[200px]">
