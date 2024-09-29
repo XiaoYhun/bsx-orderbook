@@ -9,7 +9,6 @@ import { ArrowRight } from "lucide-react";
 export default function ProductList() {
   const { productSelected, setProductSelected } = useGlobalStore();
   const { data: products } = useProducts();
-  console.log("🚀 ~ ProductList ~ products:", products);
   return (
     <div>
       <div className="flex flex-col gap-1 min-w-[200px]">

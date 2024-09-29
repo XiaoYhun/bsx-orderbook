@@ -8,10 +8,14 @@ const api = create({
 });
 
 export default function useProducts() {
-  const { data } = useQuery("products", async () => {
-    const response = await api.get<{ data: IProduct[] }>("/api/products");
-    return response.data?.data || [];
-  });
+  const { data } = useQuery(
+    "products",
+    async () => {
+      const response = await api.get<{ data: IProduct[] }>("/api/products");
+      return response.data?.data || [];
+    },
+    { refetchInterval: 10000 }
+  );
 
   return { data };
 }
