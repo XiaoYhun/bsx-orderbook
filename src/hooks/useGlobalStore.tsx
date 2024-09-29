@@ -1,4 +1,3 @@
-import { getProducts, IProduct } from "@/api";
 import { create } from "zustand";
 
 interface IGlobalStore {

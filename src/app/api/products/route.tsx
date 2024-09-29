@@ -1,5 +1,4 @@
-import { getProducts } from "@/api";
-import { create } from "apisauce";
+import { getProducts } from "@/lib/api";
 
 export async function GET(request: Request) {
   const data = await getProducts();

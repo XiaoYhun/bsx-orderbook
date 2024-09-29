@@ -1,4 +1,4 @@
-import { IProduct } from "@/api";
+import { IProduct } from "@/lib/api";
 import { create } from "apisauce";
 import { useQuery } from "react-query";
 
