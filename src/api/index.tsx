@@ -40,6 +40,6 @@ export interface IProduct {
 }
 
 export const getProducts = async () => {
-  const res = await api.get<{ products: IProduct[] }>("/products");
+  const res = await api.get<{ products: IProduct[] }>("/products", { next: { revalidate: 10 } });
   return res.data?.products || [];
 };
